@@ -171,6 +171,29 @@ ggplot(df, aes(x = neutro_c_v0, fill = nsaid)) +
 df1 <- df[,-1]
 table_one <- tableby(nsaid ~ ., data = df1)
 summary(table_one)
+# modelling
+df <- readRDS("./data/df1.RDS")
+
+with(df, plotMeans(neutro_p_v0, as.factor(pain_count_chrn), error.bars="se", connect=TRUE))
+
+
+summary(glm(formula = chrn_back_pain ~ age + sex + ethnicity + neutro_c_v0
+            , family = binomial(logit), data = df))
+
+
+backpain_chronicized$acute_only_v0 <- ifelse(backpain_chronicized$Back_pn_v0 == "1" && backpain_chronicized$Back_pn_3.m_v0 == "0", TRUE, FALSE)
+
+backpain_chronicized$acute_only_v0 <- NULL
+
+backpain_chronicized$acute_only_v0[(backpain_chronicized$Back_pn_v0 == "1")] <- 1
+backpain_chronicized$acute_only_v0[(backpain_chronicized$Back_pn_3.m_v0 != "0")] <- NA
+df <- backpain_chronicized[!is.na(backpain_chronicized$acute_only_v0),]
+df$IV <- NULL
+dim(df[(!is.na(df$Back_pn_3.m_v1) | !is.na(df$Back_pn_3.m_v2)), ]
+
+
+
+
 
 #
 #
