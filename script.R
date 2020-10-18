@@ -180,15 +180,16 @@ with(df, plotMeans(neutro_p_v0, as.factor(pain_count_chrn), error.bars="se", con
 summary(glm(formula = chrn_back_pain ~ age + sex + ethnicity + neutro_c_v0
             , family = binomial(logit), data = df))
 
-
-backpain_chronicized$acute_only_v0 <- ifelse(backpain_chronicized$Back_pn_v0 == "1" && backpain_chronicized$Back_pn_3.m_v0 == "0", TRUE, FALSE)
-
+# updated analysis
+backpain_chronicized <- readRDS("./backpain_chronicized.rds")
 backpain_chronicized$acute_only_v0 <- NULL
-
 backpain_chronicized$acute_only_v0[(backpain_chronicized$Back_pn_v0 == "1")] <- 1
 backpain_chronicized$acute_only_v0[(backpain_chronicized$Back_pn_3.m_v0 != "0")] <- NA
 df <- backpain_chronicized[!is.na(backpain_chronicized$acute_only_v0),]
-df$IV <- NULL
+df$missing_followup <- NULL
+df$missing_followup <- as.factor(is.na(df$Back_pn_3.m_v1) + is.na(df$Back_pn_3.m_v2))
+
+
 dim(df[(!is.na(df$Back_pn_3.m_v1) | !is.na(df$Back_pn_3.m_v2)), ]
 
 
