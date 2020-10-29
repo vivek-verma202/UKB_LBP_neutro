@@ -172,7 +172,7 @@ df1 <- df[,-1]
 table_one <- tableby(nsaid ~ ., data = df1)
 summary(table_one)
 # modelling
-df <- readRDS("./data/df1.RDS")
+df3 <- readRDS("./data/df1.RDS")
 
 with(df, plotMeans(neutro_p_v0, as.factor(pain_count_chrn), error.bars="se", connect=TRUE))
 
