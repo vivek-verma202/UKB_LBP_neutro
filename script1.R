@@ -49,16 +49,17 @@ odds.ratio(glm(Backpn_3m_v1_v2 ~ NSAID_v0 +
                family=binomial(logit), data=df))
 
 
+df <- readRDS("./data/df.RDS")
+round(odds.ratio(glm(Backpn_3m_v1_v2 ~ NSAID_v0 +
+                         PARACETAMOL + OPIOIDS + ANTIDEPRESSANTS +
+                         gabapentin_pregabalin + AGE + SEX + group
+                     #+ baso_p_v1
+                     #+ eosino_p_v1
+                     #+ lympho_p_v1
+                     + mono_p_v1
+                     ,family=binomial(logit), data=df)),2)
 
-odds.ratio(glm(Backpn_3m_v1_v2 ~ NSAID_v0 +
-                   PARACETAMOL + OPIOIDS + ANTIDEPRESSANTS +
-                   gabapentin_pregabalin + AGE + SEX + group
-               #+ baso_p_v1
-               #+ eosino_p_v1
-               #+ neutro_p_v1
-               #+ lympho_p_v1
-               #+ mono_p_v1
-               ,family=binomial(logit), data=df))
+
 
 
 odds.ratio(glm(Backpn_3m_v1_v2 ~ AGE + SEX + group + WBC_v1
